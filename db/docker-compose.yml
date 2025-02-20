@@ -1,0 +1,28 @@
+# Local MySQL database and admin UI
+# Access at http://localhost:8080 with:
+# - username: user
+# - password: password
+# - database: water_quality
+
+services:
+  # MySQL database
+  db:
+    image: mysql:8.4
+    restart: always
+    environment:
+      MYSQL_DATABASE: water_quality
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 3306:3306
+    volumes:
+      # Initialise db with sql scripts
+      - ./init:/docker-entrypoint-initdb.d
+
+  # Admin UI for MySQL
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
