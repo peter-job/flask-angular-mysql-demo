@@ -1,0 +1,20 @@
+[project]
+name = "water_quality"
+version = "0.0.0"
+description = "A water quality management system"
+requires-python = "==3.12.*"
+dependencies = [
+    "flask",
+    "marshmallow",
+    "flask-sqlalchemy",
+    "pymysql",
+    "cryptography"
+]
+
+[tool.uv]
+dev-dependencies = ["ruff>=0.9.6"]
+[[tool.uv.index]]
+name = "pypi"
+url = "https://pypi.org/simple"
+
+[tool.uv.sources]

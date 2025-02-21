@@ -102,3 +102,6 @@ ENV/
 
 *.iml
 .idea/
+
+# Ruff artifacts
+.ruff_cache/
