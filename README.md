@@ -8,12 +8,6 @@ Included is a [dev container](https://containers.dev) configuration for creating
 
 See the [configuration file](../.devcontainer/devcontainer.json) for more details.
 
-**Pre-requisites:**
-
--   [VS Code](https://code.visualstudio.com)
--   [VS Code Extension: Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
--   [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-
 **Tested on:**
 
 -   MacOS 15
@@ -36,9 +30,10 @@ code <this-repo>
 
 Run the command `Dev Containers: Reopen in Container` from the command palette (Cmd+Shift+P or Ctrl+Shift+P)
 
-This will open a new development environment for VS Code in a container.
+This will open a new development environment for VS Code in a container. It might take a few minutes to build the first time.
 
-If you don't see this option, make sure you have the Dev Containers extension installed.
+> [!TIP]
+> If you don't see this option, make sure you have the Dev Containers extension installed.
 
 ### Local development commands
 
@@ -55,7 +50,7 @@ make setup
 A local MySQL database and admin UI can be run using `docker compose`.
 The configuration file is located at [db/docker-compose.yml](db/docker-compose.yml).
 
-> [!NOTE]
+> [!IMPORTANT]
 > The database is not started by default. You will need to start it manually.
 
 > [!WARNING]
