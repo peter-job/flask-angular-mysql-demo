@@ -26,4 +26,8 @@ db_stop:
 	docker compose down
 
 api_start:
-	./bootstrap.sh
+	export FLASK_APP=./api
+	uv run flask --debug run -h 0.0.0.0
+
+api_test:
+	uv run python -m unittest discover -s api/tests
