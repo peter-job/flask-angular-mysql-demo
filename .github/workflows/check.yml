@@ -33,13 +33,10 @@ jobs:
         run: make setup
 
       - name: Run api tests
-        run: |
-          make api_test
+        run: make api_test
 
       - name: Run api lint and format checks
-        run: |
-          make api_check
+        run: make api_check
 
       - name: Run ui tests
-        working-directory: ./ui
         run: make ui_test
