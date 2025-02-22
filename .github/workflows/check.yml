@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: "22"
           cache: npm
-          cache-dependency-path: ./ui/node_modules
+          cache-dependency-path: ./ui/package-lock.json
 
       - name: Install dependencies
         run: make setup
