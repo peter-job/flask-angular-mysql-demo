@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
 
@@ -17,6 +18,9 @@ db = SQLAlchemy(model_class=Base)
 def create_app(test_config=None):
     """Create and configure an instance of the Flask application."""
     app = Flask(__name__, instance_relative_config=True)
+
+    # enable CORS
+    CORS(app, origins=["http://localhost:*", "http://127.0.0.1:*"])
 
     # some deploy systems set the database url in the environ
     db_url = os.environ.get("DATABASE_URL")

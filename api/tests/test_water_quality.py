@@ -2,7 +2,7 @@ import json
 import unittest
 
 from api import create_app, db
-from api.water_quality.models import Record
+from api.blueprints.water_quality.models import Record
 
 
 class WaterQualityTestCase(unittest.TestCase):

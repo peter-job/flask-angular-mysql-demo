@@ -8,7 +8,8 @@ dependencies = [
     "marshmallow",
     "flask-sqlalchemy",
     "pymysql",
-    "cryptography"
+    "cryptography",
+    "flask-cors>=5.0.0",
 ]
 
 [tool.uv]
