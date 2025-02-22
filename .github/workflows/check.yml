@@ -38,7 +38,7 @@ jobs:
 
       - name: Run api lint and format checks
         run: |
-          make ruff_check
+          make api_check
 
       - name: Run ui tests
         working-directory: ./ui
