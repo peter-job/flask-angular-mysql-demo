@@ -1,5 +1,3 @@
-# Run all lines of a target in a single shell session
-.ONESHELL:
 # Use bash as the shell
 SHELL=/bin/bash
 
@@ -15,15 +13,15 @@ uv_sync:
 	uv sync
 
 db_start:
-	cd db
+	cd db && \
 	docker compose up -d
 
 db_stop:
-	cd db
+	cd db && \
 	docker compose down
 
 api_start:
-	export FLASK_APP=./api
+	export FLASK_APP=./api \
 	uv run flask --debug run
 
 api_test:
@@ -36,9 +34,9 @@ ng_install:
 	npm install -g @angular/cli
 
 ui_install:
-	cd ui
+	cd ui && \
 	npm install
 
 ui_test:
-	cd ui
+	cd ui && \
 	npm test
