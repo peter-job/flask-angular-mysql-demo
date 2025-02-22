@@ -3,8 +3,9 @@ import datetime as dt
 from flask import Blueprint, jsonify, request
 
 from api import db
-from api.water_quality.models import Record
-from api.water_quality.schemas import RecordSchema
+
+from .models import Record
+from .schemas import RecordSchema
 
 record_schema = RecordSchema()
 records_schema = RecordSchema(many=True)

@@ -39,7 +39,7 @@ def create_app(test_config=None):
     # initialize Flask-SQLAlchemy
     db.init_app(app)
 
-    from api import water_quality
+    from api.blueprints import water_quality
 
     app.register_blueprint(water_quality.bp)
 
