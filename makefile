@@ -40,3 +40,7 @@ ui_install:
 ui_test:
 	cd ui && \
 	npm test
+
+ui_lint:
+	cd ui && \
+	npm run lint
