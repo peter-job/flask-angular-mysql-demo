@@ -84,6 +84,9 @@ To run the API locally, you can use the following makefile target:
 make api_start
 ```
 
+> [!IMPORTANT]
+> The API will not work without the database running.
+
 The API will be available at [http://127.0.0.1:5000](http://127.0.0.1:5000).
 
 Water quality routes are defined in a [Flask blueprint](./api/blueprints/records/routes.py), and have the prefix `/records`.
