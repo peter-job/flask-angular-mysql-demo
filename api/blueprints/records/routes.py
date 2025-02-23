@@ -1,6 +1,7 @@
 import datetime as dt
 
 from flask import Blueprint, jsonify, request
+from marshmallow import ValidationError
 
 from api import db
 
@@ -25,12 +26,14 @@ def get_records():
 def create_record():
     "POST /records - Create a new record."
     data = request.get_json()
-    new_record = Record(
-        location=data["location"],
-        ph_level=data["ph_level"],
-        turbidity=data["turbidity"],
-        temperature=data["temperature"],
-    )
+    if data is None:
+        return jsonify({"message": "No input data provided"}), 400
+    try:
+        validated_data = record_schema.load(data)
+    except ValidationError as err:
+        return jsonify(err.messages), 400
+
+    new_record = Record(**validated_data)
     db.session.add(new_record)
     db.session.commit()
     return jsonify(record_schema.dump(new_record)), 201
@@ -52,17 +55,15 @@ def update_record(record_id):
         Record.id == record_id, Record.deleted_at.is_(None)
     ).first_or_404()
     data = request.get_json()
+    if data is None:
+        return jsonify({"message": "No input data provided"}), 400
+    try:
+        validated_data = record_schema.load(data, partial=True)
+    except ValidationError as err:
+        return jsonify(err.messages), 400
 
-    # Update only fields provided in the request payload.
-    if "location" in data:
-        record.location = data["location"]
-    if "ph_level" in data:
-        record.ph_level = data["ph_level"]
-    if "turbidity" in data:
-        record.turbidity = data["turbidity"]
-    if "temperature" in data:
-        record.temperature = data["temperature"]
-
+    for key, value in validated_data.items():
+        setattr(record, key, value)
     db.session.commit()
     return jsonify(record_schema.dump(record))
 

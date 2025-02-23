@@ -1,4 +1,4 @@
-from marshmallow import Schema, fields, post_dump
+from marshmallow import EXCLUDE, Schema, fields, post_dump
 
 
 class RecordSchema(Schema):
@@ -10,6 +10,9 @@ class RecordSchema(Schema):
     created_at = fields.DateTime(dump_only=True)
     updated_at = fields.DateTime(dump_only=True)
     deleted_at = fields.DateTime(dump_only=True)
+
+    class Meta:
+        unknown = EXCLUDE
 
     @post_dump
     def remove_none_fields(self, data, **kwargs):
