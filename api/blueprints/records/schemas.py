@@ -1,5 +1,3 @@
-import datetime as dt
-
 from marshmallow import Schema, fields, post_dump
 
 
@@ -9,7 +7,6 @@ class RecordSchema(Schema):
     ph_level = fields.Number(required=True)
     turbidity = fields.Number(required=True)
     temperature = fields.Number(required=True)
-    recorded_at = fields.DateTime(default=dt.datetime.now, required=True)
     created_at = fields.DateTime(dump_only=True)
     updated_at = fields.DateTime(dump_only=True)
     deleted_at = fields.DateTime(dump_only=True)

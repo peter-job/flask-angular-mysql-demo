@@ -10,20 +10,20 @@ from .schemas import RecordSchema
 record_schema = RecordSchema()
 records_schema = RecordSchema(many=True)
 
-bp = Blueprint("water-quality", __name__, url_prefix="/water-quality")
-"""Blueprint for water quality API routes."""
+bp = Blueprint("records", __name__)
+"""Blueprint for water quality records API routes."""
 
 
 @bp.route("/records", methods=["GET"])
 def get_records():
-    "GET /water-quality/records - Return all records that haven't been soft-deleted."
+    "GET /records - Return all records that haven't been soft-deleted."
     records = Record.query.filter(Record.deleted_at.is_(None)).all()
     return jsonify(records_schema.dump(records))
 
 
 @bp.route("/records", methods=["POST"])
 def create_record():
-    "POST /water-quality/records - Create a new record."
+    "POST /records - Create a new record."
     data = request.get_json()
     new_record = Record(
         location=data["location"],
@@ -38,7 +38,7 @@ def create_record():
 
 @bp.route("/records/<int:record_id>", methods=["GET"])
 def get_record(record_id):
-    "GET /water-quality/records/<id> - Return a single record if it hasn't been soft-deleted."
+    "GET /records/<id> - Return a single record if it hasn't been soft-deleted."
     record = Record.query.filter(
         Record.id == record_id, Record.deleted_at.is_(None)
     ).first_or_404()
@@ -47,7 +47,7 @@ def get_record(record_id):
 
 @bp.route("/records/<int:record_id>", methods=["PATCH"])
 def update_record(record_id):
-    """PATCH /water-quality/records/<id> - Update an existing record (only if not soft-deleted)."""
+    """PATCH /records/<id> - Update an existing record (only if not soft-deleted)."""
     record = Record.query.filter(
         Record.id == record_id, Record.deleted_at.is_(None)
     ).first_or_404()
@@ -69,7 +69,7 @@ def update_record(record_id):
 
 @bp.route("/records/<int:record_id>", methods=["DELETE"])
 def delete_record(record_id):
-    "DELETE /water-quality/records/<id> - Soft delete a record by setting its deleted_at timestamp."
+    "DELETE /records/<id> - Soft delete a record by setting its deleted_at timestamp."
     record = Record.query.filter(
         Record.id == record_id, Record.deleted_at.is_(None)
     ).first_or_404()

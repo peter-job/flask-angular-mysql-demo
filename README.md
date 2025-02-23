@@ -10,13 +10,13 @@ See the [configuration file](../.devcontainer/devcontainer.json) for more detail
 
 **Tested on:**
 
--   MacOS 15
+- MacOS 15
 
 #### 1. Install dependencies
 
--   [VS Code](https://code.visualstudio.com/download)
--   [VS Code Extension: Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
--   [Docker Desktop](https://www.docker.com/products/docker-desktop)
+- [VS Code](https://code.visualstudio.com/download)
+- [VS Code Extension: Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
 #### 2. Clone the repo locally and open in VS Code
 
@@ -72,9 +72,9 @@ make db_stop
 To view the admin UI, you can navigate to [http://localhost:8080](http://localhost:8080) in your browser.
 The default credentials are:
 
--   username: `user`
--   password: `password`
--   database: `water_quality`
+- username: `user`
+- password: `password`
+- database: `water_quality`
 
 ### Local Flask API
 
@@ -86,12 +86,12 @@ make api_start
 
 The API will be available at [http://localhost:5000](http://localhost:5000).
 
-Water quality routes are defined in a [Flask blueprint](./api/water_quality/routes.py), and have the prefix `/water-quality`.
+Water quality routes are defined in a [Flask blueprint](./api/blueprints/records/routes.py), and have the prefix `/records`.
 
 You can run a manual test using the following command:
 
 ```bash
-curl http://localhost:5000/water-quality/records
+curl http://localhost:5000/records
 ```
 
 To stop the API, you can kill the process in your terminal with `Ctrl+C`.

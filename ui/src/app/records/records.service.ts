@@ -15,9 +15,9 @@ export class RecordsService {
 
   constructor(
     private http: HttpClient,
-    @Inject(API_BASE_URL_INJECTION_TOKEN) private apiBaseUrl: string,
+    @Inject(API_BASE_URL_INJECTION_TOKEN) private apiBaseUrl: string
   ) {
-    this.recordsUrl = `${this.apiBaseUrl}/water-quality/records`;
+    this.recordsUrl = `${this.apiBaseUrl}/records`;
   }
 
   /**
@@ -31,7 +31,7 @@ export class RecordsService {
    * POST a new record
    */
   createRecord(
-    record: Partial<WaterQualityRecord>,
+    record: Partial<WaterQualityRecord>
   ): Observable<WaterQualityRecord> {
     return this.http.post<WaterQualityRecord>(this.recordsUrl, record);
   }

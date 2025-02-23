@@ -11,9 +11,8 @@ class Record(db.Model):
     ph_level = Column(Float, nullable=False)
     turbidity = Column(Float, nullable=False)
     temperature = Column(Float, nullable=False)
-    recorded_at = Column(
+    created_at = Column(
         TIMESTAMP, default=dt.datetime.now(dt.timezone.utc), nullable=False
     )
-    created_at = Column(TIMESTAMP, default=dt.datetime.now(dt.timezone.utc))
     updated_at = Column(TIMESTAMP, nullable=True, onupdate=dt.datetime.now)
     deleted_at = Column(TIMESTAMP, nullable=True)
