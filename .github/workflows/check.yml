@@ -39,3 +39,6 @@ jobs:
       # Disable ui tests, requires some headless browser setup
       # - name: Run ui tests
       #   run: make ui_test
+
+      - name: Run ui lint
+        run: make ui_lint
