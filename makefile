@@ -21,7 +21,7 @@ db_stop:
 	docker compose down
 
 api_start:
-	export FLASK_APP=./api \
+	FLASK_APP=./api \
 	uv run flask --debug run
 
 api_test:
@@ -44,3 +44,7 @@ ui_test:
 ui_lint:
 	cd ui && \
 	npm run lint
+
+ui_start:
+	cd ui && \
+	npm start
