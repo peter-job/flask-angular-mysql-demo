@@ -1,9 +1,10 @@
 import os
 
-from flask import Flask
+from flask import Flask, json
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
+from werkzeug.exceptions import HTTPException, InternalServerError
 
 __version__ = (0, 0, 1, "dev")
 
@@ -20,7 +21,11 @@ def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
 
     # enable CORS
-    CORS(app, origins=["http://localhost:*", "http://127.0.0.1:*"])
+    CORS(
+        app,
+        origins=["*", "http://localhost:*", "http://127.0.0.1:*"],
+        intercept_exceptions=True,
+    )
 
     # some deploy systems set the database url in the environ
     db_url = os.environ.get("DATABASE_URL")
@@ -44,6 +49,42 @@ def create_app(test_config=None):
     db.init_app(app)
 
     from api.blueprints import water_quality
+
+    app.register_error_handler(
+        Exception, lambda e: print("Error!!!!") & {"error": str(e)}
+    )
+
+    @app.errorhandler(HTTPException)
+    def handle_http_exception(e: HTTPException):
+        """Return JSON instead of HTML for HTTP errors."""
+        # start with the correct headers and status code from the error
+        response = e.get_response()
+        # replace the body with JSON
+        response.data = json.dumps(
+            {
+                "code": e.code,
+                "name": e.name,
+                "message": e.description,
+            }
+        )
+        response.content_type = "application/json"
+        return response
+
+    @app.errorhandler(Exception)
+    def handle_exception(e: Exception):
+        """Return JSON instead of HTML for HTTP errors."""
+        # start with the correct headers and status code from the error
+        response = InternalServerError().get_response()
+        # replace the body with JSON
+        response.data = json.dumps(
+            {
+                "code": 500,
+                "name": "Internal Server Error",
+                "message": "Uh oh! Something went wrong.",
+            }
+        )
+        response.content_type = "application/json"
+        return response
 
     app.register_blueprint(water_quality.bp)
 
