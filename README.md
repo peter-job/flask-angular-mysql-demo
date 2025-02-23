@@ -84,14 +84,14 @@ To run the API locally, you can use the following makefile target:
 make api_start
 ```
 
-The API will be available at [http://localhost:5000](http://localhost:5000).
+The API will be available at [http://127.0.0.1:5000](http://127.0.0.1:5000).
 
 Water quality routes are defined in a [Flask blueprint](./api/blueprints/records/routes.py), and have the prefix `/records`.
 
 You can run a manual test using the following command:
 
 ```bash
-curl http://localhost:5000/records
+curl http://127.0.0.1:5000/records
 ```
 
 To stop the API, you can kill the process in your terminal with `Ctrl+C`.
@@ -103,6 +103,21 @@ Unit tests are available for the API and can be run using the following makefile
 ```bash
 make api_test
 ```
+
+### Local Angular UI
+
+To run the Angular UI locally, you can use the following makefile target:
+
+```bash
+make ui_start
+```
+
+The UI will be available at [http://127.0.0.1:4200](http://127.0.0.1:4200).
+
+> [!IMPORTANT]
+> The UI will not work without the API running.
+
+To stop the UI, you can kill the process in your terminal with `Ctrl+C`.
 
 ## Python dependency management with uv
 
